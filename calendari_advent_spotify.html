@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>🎄🎶 Calendari Musical 🎶🎄</title>
+  <style>
+    body { font-family: sans-serif; background: #fafafa; text-align: center; padding: 20px; }
+    .calendar { display: grid; grid-template-columns: repeat(6, 120px); gap: 10px; justify-content: center; margin-top: 30px; }
+    .day { background: white; border: 2px solid #ccc; border-radius: 10px; padding: 20px; cursor: pointer; font-weight: bold; font-size: 18px; }
+    .day.locked { background: #eee; color: #999; cursor: not-allowed; }
+    #player { margin-top: 20px; }
+
+    @media (max-width: 600px) {
+      .calendar { grid-template-columns: repeat(3, 100px); gap: 8px; }
+      .day { padding: 15px; font-size: 16px; }
+      iframe { width: 100%; height: 250px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎄🎶 Calendari Musical 🎶🎄</h1>
+  <div class="calendar" id="calendar"></div>
+  <div id="player"></div>
+
+  <script>
+    const songs = [
+      "https://open.spotify.com/embed/track/3gxEZXUjrNbl3TlSrTGbR5",
+      "https://open.spotify.com/embed/track/1ZZ45sLJAeOMpmW807hIm8",
+      "https://open.spotify.com/embed/track/5Hk4Mpex0s2ndUpDQ5v2rU",
+      "https://open.spotify.com/embed/track/19herHhe8mbbOMYILYWGnw",
+      "https://open.spotify.com/embed/track/2wnsBaxrmkthIFAm6vqCuX",
+      "https://open.spotify.com/embed/track/1gVgkQFOKa8Wc1HYsJtPdH",
+      "https://open.spotify.com/embed/track/5NlFXQ0si6U87gXs6hq81B",
+      "https://open.spotify.com/embed/track/7ifOnwJC0oH7cfbJQbUye1",
+      "https://open.spotify.com/embed/track/76ZATrojG4UsYHhE6ulqNU",
+      "https://open.spotify.com/embed/track/2SDx0PooHZI1SQKR0y44bs",
+      "https://open.spotify.com/embed/track/7HW5WIw7ZgZORCzUxv5gW5",
+      "https://open.spotify.com/embed/track/6nLvaCZFR1wEzW3sIKpsnr",
+      "https://open.spotify.com/embed/track/5jw1zzcYFivmuJK52JrnMK",
+      "https://open.spotify.com/embed/track/4CNL4GBNTdVIU5Nk6hB4LC",
+      "https://open.spotify.com/embed/track/5LxvwujISqiB8vpRYv887S",
+      "https://open.spotify.com/embed/track/2le9fblYnfoLr9dkZIsJUa",
+      "https://open.spotify.com/embed/track/6ECp64rv50XVz93WvxXMGF",
+      "https://open.spotify.com/embed/track/003vvx7Niy0yvhvHt4a68B",
+      "https://open.spotify.com/embed/track/1G5JaDf4CTkyoLRAO0pAYH",
+      "https://open.spotify.com/embed/track/2LawezPeJhN4AWuSB0GtAU",
+      "https://open.spotify.com/embed/track/4DxybsoSiMUW0JI2oM0SSN",
+      "https://open.spotify.com/embed/track/6C4LXC9UFH1IKiHYOp0BiJ",
+      "https://open.spotify.com/embed/track/3UqHlIBI771FNCiLY5MKrp",
+      "https://open.spotify.com/embed/track/3qI94hINNNeb4S7xQi18lS"
+    ];
+
+    const today = new Date().getDate(); // Dia actual del mes
+    const calendar = document.getElementById('calendar');
+
+    for (let i = 1; i <= 24; i++) {
+      const day = document.createElement('div');
+      day.textContent = i;
+      day.className = 'day' + (i > today ? ' locked' : '');
+      day.onclick = () => {
+        if (i <= today) {
+          document.getElementById('player').innerHTML =
+            `<iframe src="${songs[i-1]}" width="300" height="380" frameborder="0" allow="autoplay; clipboard-write; encrypted-media"></iframe>`;
+        }
+      };
+      calendar.appendChild(day);
+    }
+  </script>
+</body>
+</html>
